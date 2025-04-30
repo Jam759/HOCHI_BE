@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0  # MySQL 8.0 버전 사용
+    container_name: hochi_container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root  # 루트 비밀번호 설정 #we should use other pwd
+      MYSQL_DATABASE: hochi      # 기본 데이터베이스 설정
+      MYSQL_USER: dev        # 사용자 계정 생성
+      MYSQL_PASSWORD: root
+      TZ: Asia/Seoul  # 시간대 설정
+      LANG: ko_KR.UTF-8  # 한글 로케일 설정
+      LC_ALL: ko_KR.UTF-8  # 한글 로케일 설정
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
+
+
