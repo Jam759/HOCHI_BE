@@ -6,13 +6,20 @@ public abstract class AbstractBaseExceptionInterface extends RuntimeException im
 
     protected final HttpStatus status;
     protected final String errorCode;
+    protected final String devMessage;
+
+
     protected final String errorMessage;
 
-    protected AbstractBaseExceptionInterface(HttpStatus status, String errorCode, String errorMessage) {
+
+
+
+    protected AbstractBaseExceptionInterface(HttpStatus status, String errorCode, String errorMessage, String devMessage) {
         super(errorMessage);
         this.status = status;
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
+        this.devMessage = devMessage;
     }
 
     @Override
@@ -26,9 +33,16 @@ public abstract class AbstractBaseExceptionInterface extends RuntimeException im
     }
 
     @Override
+    public String getDevMessage() {
+        return devMessage;
+    }
+
+    @Override
     public String getErrorMessage() {
         return errorMessage;
     }
+
+
 
 
 }

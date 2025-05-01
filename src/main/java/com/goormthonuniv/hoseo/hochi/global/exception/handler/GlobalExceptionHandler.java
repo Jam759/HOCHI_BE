@@ -6,18 +6,21 @@ import com.goormthonuniv.hoseo.hochi.global.exception.rootException.AbstractBase
 import com.goormthonuniv.hoseo.hochi.global.exception.rootException.BaseExceptionInterface;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
     // ✅ 1. 우리가 만든 BaseException (예: NotFound, Duplicated 등) 처리
     @ExceptionHandler(AbstractBaseExceptionInterface.class)
     public ResponseEntity<ExceptionResponse> handleBaseException(BaseExceptionInterface e, HttpServletRequest request) {
+        log.error(e.getDevMessage());
         ExceptionResponse response = ExceptionResponse.builder()
                 .status(e.getStatus().value())
                 .code(e.getErrorCode())
@@ -30,10 +33,7 @@ public class GlobalExceptionHandler {
     // ✅ 2. @Valid 실패 (RequestBody DTO 검증 실패)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ExceptionResponse> handleMethodArgumentNotValid(MethodArgumentNotValidException e, HttpServletRequest request) {
-        String errorMessage = e.getBindingResult().getFieldErrors().stream()
-                .findFirst()
-                .map(error -> error.getField() + ": " + error.getDefaultMessage())
-                .orElse("잘못된 RequestBody 입력입니다. ");
+        String errorMessage = "잘못된 RequestBody 입력입니다.";
 
         ExceptionResponse response = ExceptionResponse.builder()
                 .status(HttpStatus.BAD_REQUEST.value())

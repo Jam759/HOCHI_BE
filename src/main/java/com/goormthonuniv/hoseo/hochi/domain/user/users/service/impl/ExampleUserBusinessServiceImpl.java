@@ -27,7 +27,6 @@ public class ExampleUserBusinessServiceImpl implements ExampleUsersBusinessServi
         /**
          * 저 같은경우 엔티티안에 변환로직은 안넣고 클래스 형태를 바꿔주는 로직을 가진 클래스를 만들어서 사용합니다.
          * dto패키지안에 UserDtoConverter보시면 있어요.
-         *
          * ps. UsersToExampleUserResponse더블클릭 후 Ctrl + B 같이 누르면 선언문으로 이동합니다.
          */
         return UsersToExampleUserResponse(user);
