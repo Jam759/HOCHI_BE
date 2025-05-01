@@ -13,8 +13,6 @@ import org.springframework.stereotype.Component;
 @Profile({"local", "dev"})
 public class DevLoggingAspect {
 
-    //com.goormthonuniv.hoseo.hochi
-
     @Around("execution(* com.goormthonuniv.hoseo.hochi..*(..))")
     public Object logExecution(ProceedingJoinPoint joinPoint) throws Throwable {
         long start = System.currentTimeMillis();

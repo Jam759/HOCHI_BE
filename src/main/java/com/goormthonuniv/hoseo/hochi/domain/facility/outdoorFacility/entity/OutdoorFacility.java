@@ -24,6 +24,7 @@ public class OutdoorFacility {
     private double longitude;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private OutdoorFacilityType outdoorFacilityType;
 
     private String description;

@@ -1,6 +1,7 @@
 package com.goormthonuniv.hoseo.hochi.domain.facility.indoorFacility.entity;
 
 
+import com.goormthonuniv.hoseo.hochi.domain.facility.indoorFacility.entity.enums.IndoorFacilityType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -24,7 +25,8 @@ public class IndoorFacility {
     private double longitude;
 
     @Column(nullable = false)
-    private IndoorFacility indoorFacilityType;
+    @Enumerated(EnumType.STRING)
+    private IndoorFacilityType indoorFacilityType;
 
     private String description;
 

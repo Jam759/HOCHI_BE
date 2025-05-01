@@ -24,6 +24,7 @@ public class SearchKeyword extends TimeRecordedEntity {
 
     //검색 분기점 이거 통해서 각 테이블 조회하면 됨
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private FacilityStatus facilityStatus;
 
 }

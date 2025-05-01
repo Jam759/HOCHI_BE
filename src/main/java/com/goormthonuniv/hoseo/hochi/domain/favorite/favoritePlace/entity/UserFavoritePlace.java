@@ -24,6 +24,7 @@ public class UserFavoritePlace extends TimeRecordedEntity {
 
     // SearchKeyword에 있슴
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private FacilityStatus facilityStatus;
 
 }
