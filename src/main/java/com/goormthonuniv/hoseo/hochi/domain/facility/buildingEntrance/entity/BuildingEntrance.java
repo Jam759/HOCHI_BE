@@ -22,7 +22,6 @@ public class BuildingEntrance {
     @Column(nullable = false)
     private Long locationId;
 
-    //이미지와 1:N 관계 (N임)
     private Long iconImgId;
 
 }

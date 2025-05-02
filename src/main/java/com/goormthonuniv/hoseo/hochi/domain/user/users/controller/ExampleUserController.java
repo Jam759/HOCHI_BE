@@ -21,7 +21,8 @@ public class ExampleUserController {
         return userBusinessService.getUserInfo(1L);
     }
 
-    //쉬운 예시
+    // 예시 현재 @AuthenticationPrincipal UserDetailsImpl principal이부분은 동작 안할테니
+    // 유저의 관한 정보가 필요할 경우 유저에 관한 파람을 Long userId 이런식으로 선언한 다음 서비스에 필요한 인자 넘겨주세요.
     @GetMapping()
     public ExampleUserResponse getUserInfo(@AuthenticationPrincipal UserDetailsImpl principal) {
         Users user = principal.getUser();

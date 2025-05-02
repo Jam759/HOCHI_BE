@@ -18,8 +18,10 @@ public class Building {
 
     private String name;
 
+    @Column(nullable = false)
     private double latitude;
 
+    @Column(nullable = false)
     private double longitude;
 
     @Enumerated(EnumType.STRING)

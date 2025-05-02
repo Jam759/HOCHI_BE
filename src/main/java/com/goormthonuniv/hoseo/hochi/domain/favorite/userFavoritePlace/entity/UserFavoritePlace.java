@@ -1,4 +1,4 @@
-package com.goormthonuniv.hoseo.hochi.domain.favorite.favoritePlace.entity;
+package com.goormthonuniv.hoseo.hochi.domain.favorite.userFavoritePlace.entity;
 
 import com.goormthonuniv.hoseo.hochi.domain.search.searchKeyword.entity.enums.FacilityStatus;
 import com.goormthonuniv.hoseo.hochi.global.entity.TimeRecordedEntity;

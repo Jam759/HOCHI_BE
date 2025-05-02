@@ -19,6 +19,7 @@ import static com.goormthonuniv.hoseo.hochi.global.util.GlobalCrudUtil.*;
  * 클래스이름 그대로 DB작업을 위한 서비스입니다.
  * 이곳은 DB관련 로직을 수행하면서 예외를 던집니다.
  * CRUD서비스는 항상 ENTITY를 그대로 리턴해야합니다.
+ * 그러므로 Controller에서 호출하시면 안됩니다.
  */
 @Slf4j
 @Service
@@ -32,12 +33,7 @@ public class UsersCrudServiceImpl implements UsersCrudService {
 
     @Override
     public Users save(Users user) {
-        try {
-            return entitySave(usersRepository, user);
-        } catch (DataIntegrityViolationException e) {
-            log.error("[USER_CRUD] 중복 저장 시도 - nickname: {}", user.getNickname());
-            throw new UserDuplicateKeyException(user.getNickname());
-        }
+        return saveEntity(usersRepository, user, () -> new UserDuplicateKeyException(user.getNickname()));
     }
 
     @Override
@@ -51,22 +47,24 @@ public class UsersCrudServiceImpl implements UsersCrudService {
     }
 
     @Override
+    @Transactional
     public void updateRole(Users user, UserRole role) {
         user.updateRole(role);
-
+        saveEntity(usersRepository, user, () -> new UserDuplicateKeyException(user.getNickname()));
     }
 
     @Override
+    @Transactional
     public void updateNickname(Users user, String nickname) {
         user.updateNickname(nickname);
+        saveEntity(usersRepository, user, () -> new UserDuplicateKeyException(user.getNickname()));
     }
 
 
     @Override
+    @Transactional//softDelete 라서 필요
     public void deleteById(Long id) {
-        deleteByField(usersRepository::findById, id,
-                () -> new UserNotFoundException("UserId : " + id.toString()),
-                usersRepository);
+        deleteByField(usersRepository::findById, id, () -> new UserNotFoundException("UserId : " + id.toString()), usersRepository);
     }
 
 }
