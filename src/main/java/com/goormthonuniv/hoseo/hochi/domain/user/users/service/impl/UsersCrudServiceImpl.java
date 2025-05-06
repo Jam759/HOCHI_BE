@@ -32,8 +32,9 @@ public class UsersCrudServiceImpl implements UsersCrudService {
 
 
     @Override
+    @Transactional
     public Users save(Users user) {
-        return saveEntity(usersRepository, user, () -> new UserDuplicateKeyException(user.getNickname()));
+        return saveEntity(usersRepository, user, () -> new UserDuplicateKeyException("중복된 값 저장 DB제약 확인(Unique Or Not Null)"));
     }
 
     @Override
@@ -64,7 +65,7 @@ public class UsersCrudServiceImpl implements UsersCrudService {
     @Override
     @Transactional//softDelete 라서 필요
     public void deleteById(Long id) {
-        deleteByField(usersRepository::findById, id, () -> new UserNotFoundException("UserId : " + id.toString()), usersRepository);
+        deleteByField(usersRepository::findById, id, () -> new UserNotFoundException("UserId : " + id), usersRepository);
     }
 
 }

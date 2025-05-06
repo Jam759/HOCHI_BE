@@ -19,7 +19,7 @@ public class UserSearchHistory extends TimeRecordedEntity {
     private Long userId;
 
     @Column(nullable = false)
-    private Long routeId;
+    private Long SearchKeywordId;
 
 
 }
